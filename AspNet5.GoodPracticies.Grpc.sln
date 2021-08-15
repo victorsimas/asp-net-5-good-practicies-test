@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{17FE8DE8-ECA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet5.GoodPracticies.Grpc", "src\AspNet5.GoodPracticies.Grpc\AspNet5.GoodPracticies.Grpc.csproj", "{1B8C2CCD-E2B0-40A5-9E82-6D867B004681}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet5.GoodPracticies.Api", "src\AspNet5.GoodPracticies.Api\AspNet5.GoodPracticies.Api.csproj", "{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +34,21 @@ Global
 		{1B8C2CCD-E2B0-40A5-9E82-6D867B004681}.Release|x64.Build.0 = Release|Any CPU
 		{1B8C2CCD-E2B0-40A5-9E82-6D867B004681}.Release|x86.ActiveCfg = Release|Any CPU
 		{1B8C2CCD-E2B0-40A5-9E82-6D867B004681}.Release|x86.Build.0 = Release|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x64.Build.0 = Release|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1B8C2CCD-E2B0-40A5-9E82-6D867B004681} = {17FE8DE8-ECAB-43F6-AB38-565112B4D83F}
+		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F} = {17FE8DE8-ECAB-43F6-AB38-565112B4D83F}
 	EndGlobalSection
 EndGlobal
