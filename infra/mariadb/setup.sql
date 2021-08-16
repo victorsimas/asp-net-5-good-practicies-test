@@ -1,7 +1,7 @@
-CREATE DATABASE aspnet5-gp;
+CREATE DATABASE AspNet5Teste;
 
-USE aspnet5-gp;
+USE AspNet5Teste;
 
-CREATE TABLE users (firstName VARCHAR(40), lastName VARCHAR(80), age SMALLINT, userType VARCHAR(20));
+CREATE TABLE users (userID INT PRIMARY KEY,firstName VARCHAR(40), lastName VARCHAR(80), age SMALLINT, userType VARCHAR(20));
 
-INSERT INTO users VALUES ('Joshep Edward', 'Simas Almeida', 61, 'Client')
+INSERT INTO users VALUES (123,'Joshep Edward', 'Simas Almeida', 61, 'Client'), (3421,'Claudete', 'Santos Simas Almeida', 48, 'Client');
