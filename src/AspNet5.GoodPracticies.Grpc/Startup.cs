@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AspNet5.GoodPracticies.DTO.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using src.AspNet5.GoodPracticies.Grpc.Services;
@@ -13,6 +15,13 @@ namespace AspNet5.GoodPracticies.Grpc
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            string mariaDbConnString = "Server=localhost;Port=3306;Database=AspNet5Teste;Uid=root;Pwd=root;";
+
+            services.AddDbContextPool<UsersDBContext>(
+                options => options.UseMySql(
+                    mariaDbConnString, 
+                    ServerVersion.AutoDetect(mariaDbConnString)));
+                    
             services.AddGrpc();
         }
 

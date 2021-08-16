@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet5.GoodPracticies.Grpc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet5.GoodPracticies.Api", "src\AspNet5.GoodPracticies.Api\AspNet5.GoodPracticies.Api.csproj", "{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet5.GoodPracticies.DTO", "src\AspNet5.GoodPracticies.DTO\AspNet5.GoodPracticies.DTO.csproj", "{5E3DDA57-7828-4058-BD8E-7131BF64E93B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x64.Build.0 = Release|Any CPU
 		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F}.Release|x86.Build.0 = Release|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Release|x64.Build.0 = Release|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1B8C2CCD-E2B0-40A5-9E82-6D867B004681} = {17FE8DE8-ECAB-43F6-AB38-565112B4D83F}
 		{F1BC2112-D691-4FB2-BB1D-9431C1FFFA6F} = {17FE8DE8-ECAB-43F6-AB38-565112B4D83F}
+		{5E3DDA57-7828-4058-BD8E-7131BF64E93B} = {17FE8DE8-ECAB-43F6-AB38-565112B4D83F}
 	EndGlobalSection
 EndGlobal
