@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "AspNet5.GoodPracticies.Grpc";
+
+package user;
+
+service UserRPCService {
+  rpc GetUserInfo (GetUserInfoRequest) returns (UserInfoModel);
+}
+
+message GetUserInfoRequest {
+  int32 userId = 1;
+}
+
+message UserInfoModel {
+  string firstName = 1;
+  string lastName = 2;
+  uint32 age = 3;
+  string userType = 4;
+}

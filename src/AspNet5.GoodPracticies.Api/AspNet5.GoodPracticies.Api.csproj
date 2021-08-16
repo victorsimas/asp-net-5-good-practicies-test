@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\AspNet5.GoodPracticies.Grpc\Protos\greet.proto" GrpcServices="Client" />
+    <Protobuf Include="..\AspNet5.GoodPracticies.Grpc\Protos\*" GrpcServices="Client" />
   </ItemGroup>
 </Project>
