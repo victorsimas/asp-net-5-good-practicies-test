@@ -42,12 +42,19 @@ namespace AspNet5.GoodPracticies.Api.Controllers
 
             List<UserInfoModel> users = new();
 
-            while (await call.ResponseStream.MoveNext())
+            try
             {
-                users.Add(call.ResponseStream.Current);
-            }
+                while (await call.ResponseStream.MoveNext())
+                {
+                    users.Add(call.ResponseStream.Current);
+                }
 
-            return Ok(users);
+                return Ok(users);
+            }
+            catch(RpcException ex)
+            {
+                return StatusCode(ex.ValidateRPCExceptionStatus());
+            }
         }
     }
 }
