@@ -6,10 +6,16 @@ package user;
 
 service UserRPCService {
   rpc GetUserInfo (GetUserInfoRequest) returns (UserInfoModel);
+  rpc GetManyUsersInfo (GetManyUsersInfoRequest) returns (stream UserInfoModel);
 }
 
 message GetUserInfoRequest {
   int32 userId = 1;
+}
+
+message GetManyUsersInfoRequest {
+  int32 page = 1;
+  int32 qtde = 2;
 }
 
 message UserInfoModel {

@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using AspNet5.GoodPracticies.Grpc;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,14 +22,32 @@ namespace AspNet5.GoodPracticies.Api.Controllers
         public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
-            _channel = GrpcChannel.ForAddress("http://localhost:5000");
+            _channel = GrpcChannel.ForAddress("http://localhost:6000");
             _serviceClient = new(_channel);
         }
 
-        [HttpGet]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> Get([Required] int userId)
         {
-            return Ok(await _serviceClient.GetUserInfoAsync(new() { UserId = 123 }));
+            return Ok(await _serviceClient.GetUserInfoAsync(new() { UserId = userId }));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsersPaginated([Required][FromQuery] GetManyUsersInfoRequest request)
+        {
+            request.Page = request.Page == 0 ? 1 : request.Page;
+            request.Qtde = request.Qtde == 0 ? 1 : request.Qtde;
+
+            using AsyncServerStreamingCall<UserInfoModel> call = _serviceClient.GetManyUsersInfo(request);
+
+            List<UserInfoModel> users = new();
+
+            while (await call.ResponseStream.MoveNext())
+            {
+                users.Add(call.ResponseStream.Current);
+            }
+
+            return Ok(users);
         }
     }
 }

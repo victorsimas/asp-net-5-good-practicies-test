@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AspNet5.GoodPracticies.DTO.Data;
 using AspNet5.GoodPracticies.Grpc;
 using Grpc.Core;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace src.AspNet5.GoodPracticies.Grpc.Services
@@ -27,6 +30,32 @@ namespace src.AspNet5.GoodPracticies.Grpc.Services
             }
 
             return new UserInfoModel() { UserType = user.UserType, FirstName = user.FirstName, LastName = user.LastName, Age = user.Age };
+        }
+
+        public override async Task GetManyUsersInfo(GetManyUsersInfoRequest request, IServerStreamWriter<UserInfoModel> responseStream, ServerCallContext context)
+        {
+            IEnumerable<UserDBModel> users = await _context.Users
+                .Skip(request.Qtde * request.Page)
+                    .Take(request.Qtde)
+                        .ToListAsync();
+            
+            if (users is not null  && users.Any())
+            {
+                foreach(UserDBModel user in users)
+                {
+                    await responseStream.WriteAsync(new UserInfoModel()
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Age = user.Age,
+                        UserType = user.UserType
+                    });
+                }
+            }
+            else
+            {
+                throw new RpcException(new (StatusCode.NotFound, "It was not possible to find any users"));
+            }
         }
     }
 }
