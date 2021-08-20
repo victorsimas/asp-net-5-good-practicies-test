@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNet5.GoodPracticies.DTO.Data;
@@ -13,6 +14,7 @@ namespace src.AspNet5.GoodPracticies.Grpc.Services
     {
         private readonly ILogger<UserService> _logger;
         private readonly UsersDBContext _context;
+        private static readonly Stopwatch _watch = new Stopwatch();
 
         public UserService(ILogger<UserService> logger, UsersDBContext context)
         {
@@ -34,27 +36,69 @@ namespace src.AspNet5.GoodPracticies.Grpc.Services
 
         public override async Task GetManyUsersInfo(GetManyUsersInfoRequest request, IServerStreamWriter<UserInfoModel> responseStream, ServerCallContext context)
         {
-            IEnumerable<UserDBModel> users = await _context.Users
-                .Skip(request.Qtde * request.Page)
-                    .Take(request.Qtde)
-                        .ToListAsync();
-            
-            if (users is not null  && users.Any())
+            request.Page -= 1;
+
+            if (request.AsyncList)
             {
-                foreach(UserDBModel user in users)
+                _watch.Start();
+
+                IAsyncEnumerable<UserDBModel> users = _context.Users
+                    .Skip(request.Quantity * request.Page)
+                        .Take(request.Quantity)
+                            .AsAsyncEnumerable();
+                
+                if (users is not null)
                 {
-                    await responseStream.WriteAsync(new UserInfoModel()
+                    await foreach(UserDBModel user in users)
                     {
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Age = user.Age,
-                        UserType = user.UserType
-                    });
+                        await responseStream.WriteAsync(new UserInfoModel()
+                        {
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Age = user.Age,
+                            UserType = user.UserType
+                        });
+                    }
+
+                    _logger.LogInformation($"Time of {_watch.ElapsedMilliseconds}" );
                 }
+                else
+                {
+                    throw new RpcException(new (StatusCode.NotFound, $"It was not possible to find any users, Time of {_watch.ElapsedMilliseconds}"));
+                }
+
+                _watch.Reset();
             }
             else
             {
-                throw new RpcException(new (StatusCode.NotFound, "It was not possible to find any users"));
+                _watch.Start();
+
+                IEnumerable<UserDBModel> users = await _context.Users
+                    .Skip(request.Quantity * request.Page)
+                        .Take(request.Quantity)
+                            .ToListAsync();
+                
+                if (users is not null)
+                {
+                    foreach(UserDBModel user in users)
+                    {
+                        await responseStream.WriteAsync(new UserInfoModel()
+                        {
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            Age = user.Age,
+                            UserType = user.UserType
+                        });
+                    }
+
+                    _logger.LogInformation($"Time of {_watch.ElapsedMilliseconds}" );
+                }
+                else
+                {
+                    throw new RpcException(new (StatusCode.NotFound, $"It was not possible to find any users, Time of {_watch.ElapsedMilliseconds}"));
+                }
+
+                _watch.Reset();
             }
         }
     }

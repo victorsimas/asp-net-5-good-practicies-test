@@ -17,6 +17,10 @@ namespace AspNet5.GoodPracticies.DTO.Data
                 .HasKey(p => p.UserId);
 
             modelBuilder.Entity<UserDBModel>()
+                .Property( p => p.UserId)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<UserDBModel>()
                 .Property(p => p.FirstName)
                     .HasMaxLength(40);
 

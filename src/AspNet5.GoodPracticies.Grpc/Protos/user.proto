@@ -7,6 +7,7 @@ package user;
 service UserRPCService {
   rpc GetUserInfo (GetUserInfoRequest) returns (UserInfoModel);
   rpc GetManyUsersInfo (GetManyUsersInfoRequest) returns (stream UserInfoModel);
+  rpc PostUserInfo 
 }
 
 message GetUserInfoRequest {
@@ -15,7 +16,8 @@ message GetUserInfoRequest {
 
 message GetManyUsersInfoRequest {
   int32 page = 1;
-  int32 qtde = 2;
+  int32 quantity = 2;
+  bool asyncList = 3;
 }
 
 message UserInfoModel {
@@ -23,4 +25,9 @@ message UserInfoModel {
   string lastName = 2;
   uint32 age = 3;
   string userType = 4;
+}
+
+message PostUserInfoRequest
+{
+  
 }

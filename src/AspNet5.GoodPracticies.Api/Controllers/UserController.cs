@@ -29,14 +29,21 @@ namespace AspNet5.GoodPracticies.Api.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get([Required] int userId)
         {
-            return Ok(await _serviceClient.GetUserInfoAsync(new() { UserId = userId }));
+            try
+            {
+                return Ok(await _serviceClient.GetUserInfoAsync(new() { UserId = userId }));
+            }
+            catch(RpcException ex)
+            {
+                return StatusCode(ex.ValidateRPCExceptionStatus());
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUsersPaginated([Required][FromQuery] GetManyUsersInfoRequest request)
         {
             request.Page = request.Page == 0 ? 1 : request.Page;
-            request.Qtde = request.Qtde == 0 ? 1 : request.Qtde;
+            request.Quantity = request.Quantity == 0 ? 1 : request.Quantity;
 
             using AsyncServerStreamingCall<UserInfoModel> call = _serviceClient.GetManyUsersInfo(request);
 
