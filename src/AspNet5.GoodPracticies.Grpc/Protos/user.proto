@@ -2,15 +2,19 @@ syntax = "proto3";
 
 option csharp_namespace = "AspNet5.GoodPracticies.Grpc";
 
+import "google/protobuf/empty.proto";
+
 package user;
 
 service UserRPCService {
-  rpc GetUserInfo (GetUserInfoRequest) returns (UserInfoModel);
+  rpc GetUserInfo (UserIdentityModel) returns (UserInfoModel);
   rpc GetManyUsersInfo (GetManyUsersInfoRequest) returns (stream UserInfoModel);
-  rpc PostUserInfo 
+  rpc AddUser (UserInfoModel) returns (google.protobuf.Empty);
+  rpc UpdateUser (UserInfoModel) returns (google.protobuf.Empty);
+  rpc RemoveUser (UserIdentityModel) returns (google.protobuf.Empty);
 }
 
-message GetUserInfoRequest {
+message UserIdentityModel {
   int32 userId = 1;
 }
 
@@ -21,13 +25,9 @@ message GetManyUsersInfoRequest {
 }
 
 message UserInfoModel {
-  string firstName = 1;
-  string lastName = 2;
-  uint32 age = 3;
-  string userType = 4;
-}
-
-message PostUserInfoRequest
-{
-  
+  int32 userId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  uint32 age = 4;
+  string userType = 5;
 }

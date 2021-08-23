@@ -11,8 +11,6 @@ namespace AspNet5.GoodPracticies.Grpc
             CreateHostBuilder(args).Build().Run();
         }
 
-        // Additional configuration is required to successfully run Grpc on macOS.
-        // For instructions on how to configure Kestrel and Grpc clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

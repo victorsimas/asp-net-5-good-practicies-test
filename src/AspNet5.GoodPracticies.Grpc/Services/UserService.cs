@@ -22,7 +22,7 @@ namespace src.AspNet5.GoodPracticies.Grpc.Services
             _context = context;
         }
 
-        public override async Task<UserInfoModel> GetUserInfo(GetUserInfoRequest request, ServerCallContext context)
+        public override async Task<UserInfoModel> GetUserInfo(UserIdentityModel request, ServerCallContext context)
         {
             UserDBModel user = await _context.Users.FindAsync(request.UserId);
 
@@ -100,6 +100,21 @@ namespace src.AspNet5.GoodPracticies.Grpc.Services
 
                 _watch.Reset();
             }
+        }
+
+        public override Task<Google.Protobuf.WellKnownTypes.Empty> AddUser(UserInfoModel request, ServerCallContext context)
+        {
+            return base.AddUser(request, context);
+        }
+
+        public override Task<Google.Protobuf.WellKnownTypes.Empty> UpdateUser(UserInfoModel request, ServerCallContext context)
+        {
+            return base.UpdateUser(request, context);
+        }
+
+        public override Task<Google.Protobuf.WellKnownTypes.Empty> RemoveUser(UserIdentityModel request, ServerCallContext context)
+        {
+            return base.RemoveUser(request, context);
         }
     }
 }
