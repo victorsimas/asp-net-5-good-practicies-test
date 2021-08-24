@@ -63,5 +63,50 @@ namespace AspNet5.GoodPracticies.Api.Controllers
                 return StatusCode(ex.ValidateRPCExceptionStatus());
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostNewUser([Required][FromBody] UserInfoModel user)
+        {
+            try
+            {
+                await _serviceClient.AddUserAsync(user);
+
+                return Accepted();
+            }
+            catch(RpcException ex)
+            {
+                return StatusCode(ex.ValidateRPCExceptionStatus());
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserInfo([Required][FromBody] UserInfoModel user)
+        {
+            try
+            {
+                await _serviceClient.UpdateUserAsync(user);
+
+                return Accepted();
+            }
+            catch(RpcException ex)
+            {
+                return StatusCode(ex.ValidateRPCExceptionStatus());
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser([Required][FromBody] UserIdentityModel user)
+        {
+            try
+            {
+                await _serviceClient.RemoveUserAsync(user);
+
+                return Accepted();
+            }
+            catch(RpcException ex)
+            {
+                return StatusCode(ex.ValidateRPCExceptionStatus());
+            }
+        }
     }
 }

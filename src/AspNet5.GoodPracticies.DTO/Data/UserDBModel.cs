@@ -5,8 +5,18 @@ namespace AspNet5.GoodPracticies.DTO.Data
 {
     public class UserDBModel
     {
+        public UserDBModel()
+        {
+
+        }
+
+        public UserDBModel(int userId)
+        {
+            UserId = userId;
+        }
+        
         [Required]
-        internal int UserId { get; set; }
+        public int UserId { get; private set; }
 
         [Required]
         [MaxLength(40)]

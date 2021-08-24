@@ -17,8 +17,7 @@ namespace AspNet5.GoodPracticies.DTO.Data
                 .HasKey(p => p.UserId);
 
             modelBuilder.Entity<UserDBModel>()
-                .Property( p => p.UserId)
-                .ValueGeneratedOnAdd();
+                .Property( p => p.UserId);
 
             modelBuilder.Entity<UserDBModel>()
                 .Property(p => p.FirstName)
