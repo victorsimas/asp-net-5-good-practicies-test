@@ -2,7 +2,7 @@ CREATE DATABASE AspNet5Teste;
 
 USE AspNet5Teste;
 
-CREATE TABLE Users (userID INT PRIMARY KEY,firstName VARCHAR(40), lastName VARCHAR(80), age SMALLINT, userType VARCHAR(20));
+CREATE TABLE Users (userID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,firstName VARCHAR(40), lastName VARCHAR(80), age SMALLINT, userType VARCHAR(20));
 
 INSERT INTO Users VALUES
     (1,'nome','sobrenome',11,'tipoUsuario'),
